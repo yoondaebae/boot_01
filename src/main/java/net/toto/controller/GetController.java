@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
 import net.toto.dto.MemberDTO;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/get-api")
 public class GetController {
 

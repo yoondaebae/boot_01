@@ -5,8 +5,6 @@ server:
 --- #MVC view
 spring:
   mvc:
-    pathmatch:
-      matching-strategy: ant-path-matcher
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
@@ -35,4 +33,3 @@ mybatis:
     default-fetch-size: 500
   mapper-locations:
   - classpath:mybatis/mapper/*.xml
-
