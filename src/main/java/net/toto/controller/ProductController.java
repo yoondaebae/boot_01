@@ -1,5 +1,7 @@
 package net.toto.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +16,9 @@ import net.toto.service.ProductService;
 @RestController
 @RequestMapping("/api/v1/product-api")
 public class ProductController {
-
+	
+	private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+	
 	private ProductService productService;
 	
 	public ProductController(ProductService productService) {
@@ -24,7 +28,13 @@ public class ProductController {
 	//http://localhost:8080/api/v1/product/{productId}
 	@GetMapping("/product/{productId}")
 	public ProductDto getProduct(@PathVariable String productId) {
-		return productService.getProduct(productId);
+		long startTime = System.currentTimeMillis();
+		LOGGER.info("[ProductController] perform {} of TOTO Net API.","getProduct");
+		ProductDto productDto = productService.getProduct(productId);
+		
+		LOGGER.info("[ProductController] Response :: productId = {}, productName = {},productPrice = {},productStock = {}, Response Time = {}ms",
+				productDto.getProductId(), productDto.getProductName(), productDto.getProductPrice(), productDto.getProductStock(),(System.currentTimeMillis() - startTime));
+		return productDto;
 	}
 	
 	//http://localhost:8080/api/v1/product
