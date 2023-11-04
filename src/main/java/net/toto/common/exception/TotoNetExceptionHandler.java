@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class TotoNetExceptionHandler {
 
-	private final Logger LOGGER = LoggerFactory.getLogger(TotoNetExceptionHandler.class);
-	
-	@ExceptionHandler(value = Exception.class)
-    public ResponseEntity<Map<String, String>> ExceptionHandler(Exception e) {
-        HttpHeaders responseHeaders = new HttpHeaders();
-        //responseHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
-        HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+  private final Logger LOGGER = LoggerFactory.getLogger(TotoNetExceptionHandler.class);
 
-        LOGGER.info(e.getMessage());
-        LOGGER.info("Advice 내 ExceptionHandler 호출");
+  @ExceptionHandler(value = Exception.class)
+  public ResponseEntity<Map<String, String>> ExceptionHandler(Exception e) {
+    HttpHeaders responseHeaders = new HttpHeaders();
+    // responseHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json");
+    HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
 
-        Map<String, String> map = new HashMap<>();
-        map.put("error type", httpStatus.getReasonPhrase());
-        map.put("code", "400");
-        map.put("message", "에러 발생");
+    LOGGER.info(e.getMessage());
+    LOGGER.info("Advice 내 ExceptionHandler 호출");
 
-        return new ResponseEntity<>(map, responseHeaders, httpStatus);
-    }
+    Map<String, String> map = new HashMap<>();
+    map.put("error type", httpStatus.getReasonPhrase());
+    map.put("code", "400");
+    map.put("message", "에러 발생");
+
+    return new ResponseEntity<>(map, responseHeaders, httpStatus);
+  }
 }

@@ -13,31 +13,31 @@ import net.toto.dto.MemberDTO;
 @RequestMapping("/api/v1/post-api")
 public class PostController {
 
-	@PostMapping("/default")
-	public String postMethod() {
-		return "Hello World!";
-	}
-	
-	//http://localhost:8080/api/v1/post-api/member
-	/*
-	 * { "name":"TOTO", "email":"yoondaebae@gmail.com", "organization":"DaeKyo" }
-	 */
-	@PostMapping("/member")
-	public String postMember(@RequestBody Map<String, Object> postData) {
-		StringBuilder sb = new StringBuilder();
-		
-		postData.entrySet().forEach(map ->{
-			sb.append(map.getKey()+" : "+ map.getValue()+"\n");
-		});
-		return sb.toString();
-	}
-	
-	//http://localhost:8080/api/v1/post-api/member2
-	/*
-	 * { "name":"TOTO", "email":"yoondaebae@gmail.com", "organization":"DaeKyo" }
-	 */
-	@PostMapping("/member2")
-	public String postMemberDto(@RequestBody MemberDTO memberDTO) {
-		return memberDTO.toString();
-	}
+  @PostMapping("/default")
+  public String postMethod() {
+    return "Hello World!";
+  }
+
+  // http://localhost:8080/api/v1/post-api/member
+  /*
+   * { "name":"TOTO", "email":"yoondaebae@gmail.com", "organization":"DaeKyo" }
+   */
+  @PostMapping("/member")
+  public String postMember(@RequestBody Map<String, Object> postData) {
+    StringBuilder sb = new StringBuilder();
+
+    postData.entrySet().forEach(map -> {
+      sb.append(map.getKey() + " : " + map.getValue() + "\n");
+    });
+    return sb.toString();
+  }
+
+  // http://localhost:8080/api/v1/post-api/member2
+  /*
+   * { "name":"TOTO", "email":"yoondaebae@gmail.com", "organization":"DaeKyo" }
+   */
+  @PostMapping("/member2")
+  public String postMemberDto(@RequestBody MemberDTO memberDTO) {
+    return memberDTO.toString();
+  }
 }

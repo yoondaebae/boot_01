@@ -20,47 +20,50 @@ import net.toto.service.ProductService;
 @RestController
 @RequestMapping("/api/v1/product-api")
 public class ProductController {
-	
-	private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
-	
-	private ProductService productService;
-	
-	public ProductController(ProductService productService) {
-		this.productService = productService;
-	}
-	
-	//http://localhost:8080/api/v1/product/{productId}
-	@GetMapping("/product/{productId}")
-	public ProductDto getProduct(@PathVariable String productId) {
-		long startTime = System.currentTimeMillis();
-		LOGGER.info("[ProductController] perform {} of TOTO Net API.","getProduct");
-		ProductDto productDto = productService.getProduct(productId);
-		
-		LOGGER.info("[ProductController] Response :: productId = {}, productName = {},productPrice = {},productStock = {}, Response Time = {}ms",
-				productDto.getProductId(), productDto.getProductName(), productDto.getProductPrice(), productDto.getProductStock(),(System.currentTimeMillis() - startTime));
-		return productDto;
-	}
-	
-	//http://localhost:8080/api/v1/product
-	@PostMapping("/product")
-	public ProductDto createProduct(@Valid @RequestBody ProductDto productDto) {
-		String productId = productDto.getProductId();
-		String productName = productDto.getProductName();
-		int productPrice = productDto.getProductPrice();
-		int productStock = productDto.getProductStock();
-		
-		return productService.saveProduct(productId, productName, productPrice, productStock);
-	}
-	
-	//http://localhost:8080/api/v1/product/{productId}
-	@DeleteMapping("/product/{productId}")
-	public ProductDto deleteProduct(@PathVariable String productId) {
-		return null;
-	}
-	
-	@PostMapping("/product/exception")
-	public void exceptionTest() throws TotoNetException {
-		//throw new TotoNetException(ExceptionClass.PRODUCT, HttpStatus.BAD_REQUEST, "의도한 에러가 발생했습니다.");
-		throw new TotoNetException(ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN, "접근이 금지되었습니다.");
-	}
+
+  private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+
+  private ProductService productService;
+
+  public ProductController(ProductService productService) {
+    this.productService = productService;
+  }
+
+  // http://localhost:8080/api/v1/product/{productId}
+  @GetMapping("/product/{productId}")
+  public ProductDto getProduct(@PathVariable String productId) {
+    long startTime = System.currentTimeMillis();
+    LOGGER.info("[ProductController] perform {} of TOTO Net API.", "getProduct");
+    ProductDto productDto = productService.getProduct(productId);
+
+    LOGGER.info(
+        "[ProductController] Response :: productId = {}, productName = {},productPrice = {},productStock = {}, Response Time = {}ms",
+        productDto.getProductId(), productDto.getProductName(), productDto.getProductPrice(),
+        productDto.getProductStock(), (System.currentTimeMillis() - startTime));
+    return productDto;
+  }
+
+  // http://localhost:8080/api/v1/product
+  @PostMapping("/product")
+  public ProductDto createProduct(@Valid @RequestBody ProductDto productDto) {
+    String productId = productDto.getProductId();
+    String productName = productDto.getProductName();
+    int productPrice = productDto.getProductPrice();
+    int productStock = productDto.getProductStock();
+
+    return productService.saveProduct(productId, productName, productPrice, productStock);
+  }
+
+  // http://localhost:8080/api/v1/product/{productId}
+  @DeleteMapping("/product/{productId}")
+  public ProductDto deleteProduct(@PathVariable String productId) {
+    return null;
+  }
+
+  @PostMapping("/product/exception")
+  public void exceptionTest() throws TotoNetException {
+    // throw new TotoNetException(ExceptionClass.PRODUCT, HttpStatus.BAD_REQUEST, "의도한 에러가
+    // 발생했습니다.");
+    throw new TotoNetException(ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN, "접근이 금지되었습니다.");
+  }
 }
